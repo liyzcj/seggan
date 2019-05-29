@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+from models.Gan import Dis
 
 def linear(input_, output_size, scope=None):
     '''
@@ -49,7 +50,7 @@ def highway(input_, size, num_layers=1, bias=-2.0, f=tf.nn.relu, scope='Highway'
     return output
 
 
-class Discriminator(object):
+class Discriminator(Dis):
     """
     A CNN for text classification.
     Uses an embedding layer, followed by a convolutional, max-pooling and softmax layer.
@@ -154,3 +155,6 @@ class Discriminator(object):
         d_optimizer = tf.train.AdamOptimizer(1e-4)
         grads_and_vars = d_optimizer.compute_gradients(self.loss, self.params, aggregation_method=2)
         self.train_op = d_optimizer.apply_gradients(grads_and_vars)
+
+    def predict(self):
+        pass

@@ -8,7 +8,7 @@ import tensorflow as tf
 from models.leakgan.Leakgan import Leakgan
 from models.mle.Mle import Mle
 from models.seqgan.Seqgan import Seqgan
-from models.mrelgan.Relgan import MRelgan
+from models.relgan.Relgan import Relgan
 
 from utils.config import Config
 from utils.text_process import save_dict_file, get_dict_from_vocab
@@ -17,7 +17,7 @@ gans = {
     'seqgan': Seqgan,
     'leakgan': Leakgan,
     'mle': Mle,
-    'mrelgan': MRelgan,
+    'relgan': Relgan,
 }
 training_mode = {'oracle', 'cfg', 'real'}
 

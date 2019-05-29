@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 
 from models.Gan import Gen
-from models.mrelgan.RelganMemory import RelationalMemory
+from models.relgan.RelganMemory import RelationalMemory
 from tensorflow.python.ops import tensor_array_ops, control_flow_ops
 from utils.ops import *
 

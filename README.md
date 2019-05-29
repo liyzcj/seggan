@@ -29,7 +29,7 @@ flags:
 .\main.py:
   --data: Dataset for real Training
     (default: 'image_coco')
-  --gan: <seqgan|leakgan|mle|mrelgan>: Type of GAN to Training
+  --gan: <seqgan|leakgan|mle|relgan>: Type of GAN to Training
     (default: 'mle')
   --gpu: The GPU used for training
     (default: '0')

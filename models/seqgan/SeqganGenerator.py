@@ -1,9 +1,10 @@
 import tensorflow as tf
 from tensorflow.python.ops import tensor_array_ops, control_flow_ops
 import numpy as np
+from models.Gan import Gen
 
 
-class Generator(object):
+class Generator(Gen):
     def __init__(self, num_vocabulary, batch_size, emb_dim, hidden_dim,
                  sequence_length, start_token,
                  learning_rate=0.01, reward_gamma=0.95):
@@ -129,6 +130,9 @@ class Generator(object):
     def pretrain_step(self, sess, x):
         outputs = sess.run([self.pretrain_updates, self.pretrain_loss], feed_dict={self.x: x})
         return outputs
+
+    def get_nll(self):
+        pass
 
     def init_matrix(self, shape):
         return tf.random_normal(shape, stddev=0.1)

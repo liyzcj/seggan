@@ -5,17 +5,17 @@ import time
 from colorama import Fore
 
 from models.Gan import Gan
-from models.mrelgan.RelganGenerator import Generator
-from models.mrelgan.RelganDiscriminator import Discriminator
-from models.mrelgan.RelganDataLoader import RealDataLoader
-from models.mrelgan.RelganDataLoader import OracleDataLoader
+from models.relgan.RelganGenerator import Generator
+from models.relgan.RelganDiscriminator import Discriminator
+from models.relgan.RelganDataLoader import RealDataLoader
+from models.relgan.RelganDataLoader import OracleDataLoader
 from utils.ops import get_losses
 from utils.utils import *
 from utils.text_process import *
 from utils.others.OracleLstm import OracleLstm
 
 
-class MRelgan(Gan):
+class Relgan(Gan):
 
     def __init__(self):
         super().__init__()
