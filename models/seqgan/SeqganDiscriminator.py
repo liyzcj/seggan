@@ -78,20 +78,20 @@ class Discriminator(Dis):
                     name="W")
                 self.embedded_chars = tf.nn.embedding_lookup(self.W, self.input_x)
                 
-            # # Mycode : split sentences
-            # with tf.name_scope("spliter"):
-            #     splited_out = []
-            #     for length in self.splited_steps:
-            #         W = np.zeros([1, sequence_length, 1])
-            #         W[0, 0:length, 0] = 1
-            #         W = tf.constant(W, dtype=tf.float32, name=f"W{length}")
-            #         result = self.embedded_chars * W
-            #         splited_out.append(result)
+            # Mycode : split sentences
+            with tf.name_scope("spliter"):
+                splited_out = []
+                for length in self.splited_steps:
+                    W = np.zeros([1, sequence_length, 1])
+                    W[0, 0:length, 0] = 1
+                    W = tf.constant(W, dtype=tf.float32, name=f"W{length}")
+                    result = self.embedded_chars * W
+                    splited_out.append(result)
                 
-            #     emb_x_split = tf.concat(splited_out, 0)
+                emb_x_split = tf.concat(splited_out, 0)
 
-            # self.embedded_chars_expanded = tf.expand_dims(emb_x_split, -1)
-            self.embedded_chars_expanded = tf.expand_dims(self.embedded_chars, -1)
+            self.embedded_chars_expanded = tf.expand_dims(emb_x_split, -1)
+            # self.embedded_chars_expanded = tf.expand_dims(self.embedded_chars, -1)
 
             # Create a convolution + maxpool layer for each filter size
             pooled_outputs = []
@@ -138,10 +138,10 @@ class Discriminator(Dis):
                 l2_loss += tf.nn.l2_loss(W)
                 l2_loss += tf.nn.l2_loss(b)
                 self.scores = tf.nn.xw_plus_b(self.h_drop, W, b, name="scores")
-                ## my code average scores
-                # self.scores = tf.reshape(self.scores, [len(self.splited_steps), -1, num_classes])
-                # self.scores = tf.reduce_mean(self.scores, axis=0)
-                ## =====
+                # my code average scores
+                self.scores = tf.reshape(self.scores, [len(self.splited_steps), -1, num_classes])
+                self.scores = tf.reduce_mean(self.scores, axis=0)
+                # =====
                 self.ypred_for_auc = tf.nn.softmax(self.scores)
                 self.predictions = tf.argmax(self.scores, 1, name="predictions")
 
